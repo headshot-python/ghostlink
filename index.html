@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghostlink — Resurrect Dead Links</title>
+<meta name="description" content="Paste a dead link and bring it back to life with the Internet Archive's Wayback Machine. Free, no account, no tracking.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 8 C26 8 14 30 14 56 L14 88 L26 78 L38 88 L50 78 L62 88 L74 78 L86 88 L86 56 C86 30 74 8 50 8 Z' fill='%23b7f36b'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="brand">
+    <svg class="ghost-mark" viewBox="0 0 100 100" aria-hidden="true">
+      <path d="M50 8 C26 8 14 30 14 56 L14 88 L26 78 L38 88 L50 78 L62 88 L74 78 L86 88 L86 56 C86 30 74 8 50 8 Z" fill="#b7f36b"/>
+      <circle cx="37" cy="46" r="6.5" fill="#0d0b14"/>
+      <circle cx="63" cy="46" r="6.5" fill="#0d0b14"/>
+      <ellipse cx="50" cy="62" rx="5" ry="7" fill="#0d0b14"/>
+    </svg>
+    <div>
+      <h1>Ghostlink</h1>
+      <p class="tagline">Dead links, back from the dead.</p>
+    </div>
+  </div>
+  <span class="event-badge">Kiroween 2026 &middot; Resurrection</span>
+</header>
+
+<main>
+  <section class="intro">
+    <p>Every year, millions of links die. Blog posts, research citations, old
+    documentation — gone. But the Internet Archive's Wayback Machine already saved
+    most of them. Paste a dead link below and <strong>resurrect it</strong>.</p>
+  </section>
+
+  <nav class="tabs" role="tablist" aria-label="Ghostlink tools">
+    <button class="tab active" role="tab" aria-selected="true" data-tab="resurrect">Resurrect</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="batch">Batch check</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="graveyard">Graveyard <span id="graveyard-count" class="count-badge"></span></button>
+  </nav>
+
+  <!-- Resurrect -->
+  <section id="panel-resurrect" class="panel" role="tabpanel">
+    <form id="resurrect-form" autocomplete="off">
+      <label for="url-input">Paste a dead (or living) link</label>
+      <div class="input-row">
+        <input id="url-input" type="text" inputmode="url" placeholder="https://example.com/old-page" spellcheck="false">
+        <button type="submit" id="resurrect-btn" class="btn-primary">Resurrect</button>
+      </div>
+      <p id="url-error" class="error" hidden></p>
+    </form>
+    <div class="examples">
+      <span>Try a famous ghost:</span>
+      <button type="button" class="chip" data-url="geocities.com">geocities.com</button>
+      <button type="button" class="chip" data-url="https://www.myspace.com">MySpace</button>
+      <button type="button" class="chip" data-url="https://www.orkut.com">Orkut</button>
+    </div>
+
+    <div id="status-line" class="status-line" hidden></div>
+
+    <article id="result-card" class="result-card" hidden>
+      <div class="result-head">
+        <span id="result-badge" class="badge"></span>
+        <span id="result-url" class="result-url"></span>
+      </div>
+      <p id="result-meta" class="result-meta"></p>
+      <div class="result-actions">
+        <a id="open-archived" class="btn" href="#" target="_blank" rel="noopener">Open archived page</a>
+        <button type="button" id="copy-link" class="btn">Copy snapshot link</button>
+        <a id="save-now" class="btn btn-ghost" href="#" target="_blank" rel="noopener">Save a copy now</a>
+      </div>
+      <div id="timeline" class="timeline" hidden>
+        <p class="timeline-label">Snapshots through the years — pick one:</p>
+        <div id="timeline-chips" class="timeline-chips"></div>
+      </div>
+      <div class="viewer-wrap">
+        <iframe id="viewer" title="Archived page" sandbox="allow-same-origin allow-scripts allow-forms allow-popups" loading="lazy"></iframe>
+      </div>
+    </article>
+  </section>
+
+  <!-- Batch -->
+  <section id="panel-batch" class="panel" hidden role="tabpanel">
+    <p class="panel-desc">Paste up to 50 links, one per line. Ghostlink checks each
+    one against the archive and tells you which can be brought back — handy for
+    auditing link rot in an old blog or bibliography.</p>
+    <label for="batch-input">Links to check</label>
+    <textarea id="batch-input" rows="8" placeholder="https://example.com/page-1&#10;https://example.com/page-2&#10;…"></textarea>
+    <div class="input-row">
+      <button type="button" id="batch-btn" class="btn-primary">Check all</button>
+      <button type="button" id="batch-clear" class="btn">Clear</button>
+    </div>
+    <p id="batch-progress" class="status-line" hidden></p>
+    <div id="batch-results" hidden>
+      <table class="results-table">
+        <thead>
+          <tr><th>Link</th><th>Archive</th><th>Snapshot</th><th></th></tr>
+        </thead>
+        <tbody id="batch-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Graveyard -->
+  <section id="panel-graveyard" class="panel" hidden role="tabpanel">
+    <p class="panel-desc">Every link you resurrect is buried here, in your browser
+    only. Nothing leaves your device.</p>
+    <ul id="graveyard-list" class="graveyard-list"></ul>
+    <p id="graveyard-empty" class="muted">The graveyard is empty — nothing resurrected yet.</p>
+    <button type="button" id="graveyard-clear" class="btn">Clear the graveyard</button>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>Powered by the <a href="https://web.archive.org/" target="_blank" rel="noopener">Wayback Machine</a> at the Internet Archive.
+  Ghostlink is an independent project and is not affiliated with the Internet Archive.</p>
+  <p>Built with <a href="https://kiro.dev" target="_blank" rel="noopener">Kiro</a> for Kiroween 2026.
+  <a href="https://github.com/headshot-python/ghostlink" target="_blank" rel="noopener">Source on GitHub</a></p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

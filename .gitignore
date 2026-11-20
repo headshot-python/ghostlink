@@ -1,0 +1,5 @@
+# Ghostlink .gitignore — NOTE: .kiro/ must NEVER be ignored.
+# The Kiroween 2026 rules require the .kiro directory in the repository.
+node_modules/
+.DS_Store
+*.log
