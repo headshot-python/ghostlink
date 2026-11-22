@@ -229,7 +229,7 @@ if (typeof document !== 'undefined') {
 
   $('copy-link').addEventListener('click', function () {
     var link = $('open-archived').href;
-    function done(btn) { var b = $('copy-link'); b.textContent = 'Copied!'; setTimeout(function () { b.textContent = 'Copy snapshot link'; }, 1500); }
+    function done() { var b = $('copy-link'); b.textContent = 'Copied!'; setTimeout(function () { b.textContent = 'Copy snapshot link'; }, 1500); }
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(link).then(done, function () { fallbackCopy(link); done(); });
     } else { fallbackCopy(link); done(); }

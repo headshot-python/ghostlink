@@ -33,13 +33,13 @@
   </section>
 
   <nav class="tabs" role="tablist" aria-label="Ghostlink tools">
-    <button class="tab active" role="tab" aria-selected="true" data-tab="resurrect">Resurrect</button>
-    <button class="tab" role="tab" aria-selected="false" data-tab="batch">Batch check</button>
-    <button class="tab" role="tab" aria-selected="false" data-tab="graveyard">Graveyard <span id="graveyard-count" class="count-badge"></span></button>
+    <button id="tab-resurrect" class="tab active" role="tab" aria-selected="true" aria-controls="panel-resurrect" data-tab="resurrect">Resurrect</button>
+    <button id="tab-batch" class="tab" role="tab" aria-selected="false" aria-controls="panel-batch" data-tab="batch">Batch check</button>
+    <button id="tab-graveyard" class="tab" role="tab" aria-selected="false" aria-controls="panel-graveyard" data-tab="graveyard">Graveyard <span id="graveyard-count" class="count-badge"></span></button>
   </nav>
 
   <!-- Resurrect -->
-  <section id="panel-resurrect" class="panel" role="tabpanel">
+  <section id="panel-resurrect" class="panel" role="tabpanel" aria-labelledby="tab-resurrect">
     <form id="resurrect-form" autocomplete="off">
       <label for="url-input">Paste a dead (or living) link</label>
       <div class="input-row">
@@ -79,7 +79,7 @@
   </section>
 
   <!-- Batch -->
-  <section id="panel-batch" class="panel" hidden role="tabpanel">
+  <section id="panel-batch" class="panel" hidden role="tabpanel" aria-labelledby="tab-batch">
     <p class="panel-desc">Paste up to 50 links, one per line. Ghostlink checks each
     one against the archive and tells you which can be brought back — handy for
     auditing link rot in an old blog or bibliography.</p>
@@ -101,7 +101,7 @@
   </section>
 
   <!-- Graveyard -->
-  <section id="panel-graveyard" class="panel" hidden role="tabpanel">
+  <section id="panel-graveyard" class="panel" hidden role="tabpanel" aria-labelledby="tab-graveyard">
     <p class="panel-desc">Every link you resurrect is buried here, in your browser
     only. Nothing leaves your device.</p>
     <ul id="graveyard-list" class="graveyard-list"></ul>

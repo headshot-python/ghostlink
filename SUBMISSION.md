@@ -15,8 +15,7 @@ Kiro (CLI 3.5.0, spec-driven development), HTML, CSS, JavaScript, Wayback Machin
 ## Links (fill in after deploy)
 - Live app: https://headshot-python.github.io/ghostlink/
 - GitHub repo: https://github.com/headshot-python/ghostlink
-- Demo video (YouTube, public, under 3 min): TODO — file ready at
-  `demo/ghostlink-demo.mp4` (89 s, 1280x720, 4.5 MB), upload and paste link here
+- Demo video (YouTube, public, under 3 min): https://www.youtube.com/watch?v=rILpYJTAPK4 (uploaded and verified public 2026-11-23 00:10 CST; 89 s, 1280x720)
 
 ## Description (for the Devpost form)
 
@@ -59,8 +58,12 @@ nothing.
   smoke test after each spec task, and guards the `.kiro` directory against
   deletion or gitignore.
 - **Custom agent:** a `ghostlink-builder` agent definition scopes the build.
-- **Kiro CLI 3.5.0** was installed and used for the implementation review
-  pass (see KIRO_USAGE.md in the repo for the honest, itemized record).
+- **Kiro CLI 3.5.0** was installed (spec, steering, hooks and custom agent
+  as above) and signed in (Builder ID, 6712369@gmail.com); the CLI
+  implementation-review pass ran on 2026-11-23, checked the code against
+  the spec, fixed 4 small issues (ARIA tab attributes, a dead parameter,
+  two design-doc inaccuracies), and the smoke test passes — see
+  KIRO_USAGE.md in the repo for the honest, itemized record.
 
 ## Bonus prizes
 None apply (not a startup, not a student project, did not register for

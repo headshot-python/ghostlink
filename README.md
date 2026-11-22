@@ -6,7 +6,7 @@ the page back from the Internet Archive's Wayback Machine.
 Built with [Kiro](https://kiro.dev) for **Kiroween 2026** (Resurrection category).
 
 - **Live site:** https://headshot-python.github.io/ghostlink/
-- **Demo video:** (YouTube link added on submission)
+- **Demo video:** https://www.youtube.com/watch?v=rILpYJTAPK4
 
 ## What it does
 

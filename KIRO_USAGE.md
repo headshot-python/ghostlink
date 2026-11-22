@@ -23,10 +23,28 @@ Kiroween 2026 judges. Nothing here is embellished.
 
 ## Implementation pass
 
-- [ ] Kiro CLI sign-in via device flow (Google/GitHub) — pending at the time
-  of writing; the CLI is installed and ready.
-- [ ] Kiro CLI implementation review + fix pass against this spec — to be run
-  after sign-in; changes it makes will be listed here.
+- [x] Kiro CLI sign-in via device flow — done 2026-11-23 00:20 CST.
+  `kiro-cli whoami` confirms: Logged in with Builder ID,
+  email 6712369@gmail.com, region us-east-1. (Device code MHGS-FXDD;
+  the earlier code CMLT-NBWF expired unused after 10 minutes.)
+- [x] Kiro CLI implementation review + fix pass against this spec — run
+  2026-11-23 00:20–00:30 CST via `kiro-cli chat --no-interactive`.
+  It checked all 7 requirement sections (R1–R7), the design components,
+  data models, error handling, and the `.kiro/` structure, and ran
+  `node --check app.js` plus the full smoke test (all 4 stages pass).
+  It found and fixed 4 small discrepancies, all re-verified with the
+  smoke test passing again afterwards (also re-run independently by Muse):
+  1. `index.html` — completed the ARIA tab pattern (added `aria-controls`
+     on tabs and `aria-labelledby` on panels; Req 7.2).
+  2. `app.js` — removed a dead unused `btn` parameter in the copy-link
+     `done` callback.
+  3. `.kiro/specs/ghostlink/design.md` — corrected the share-hash encoding
+     from `base64url` to `encodeURIComponent(url)`, matching the code.
+  4. `.kiro/specs/ghostlink/design.md` — corrected component function
+     names (`clearGraveyard`, `updateHash`/`loadFromHash` do not exist as
+     named functions; the logic is inlined in `resurrect`).
+  No other changes were made by the review pass. Full log kept on the
+  build machine at `/tmp/kiro-review-20261123.log` (ephemeral).
 
 ## What Kiro did not do
 
