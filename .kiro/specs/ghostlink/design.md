@@ -68,15 +68,16 @@ required to run the app.
   public API), updating a progress line after each row.
 - Renders a results table: URL, snapshot status, snapshot date, resurrect link.
 
-### Graveyard (`loadGraveyard`, `saveToGraveyard`, `clearGraveyard`)
+### Graveyard (`loadGraveyard`, `saveToGraveyard`)
 
 - `localStorage` key `ghostlink.graveyard.v1`, an array of
   `{ url, timestamp, snapshotUrl, date }`, capped at 50 entries, newest first.
 - All reads wrapped in try/catch so a corrupted store never breaks the app.
 
-### Sharing (`updateHash`, `loadFromHash`)
+### Sharing (inlined in `resurrect`)
 
-- On success, sets `location.hash` to `#u=<base64url of the URL>`.
+- On success, sets `location.hash` to `#u=<encodeURIComponent(url)>` via
+  `history.replaceState`.
 - On page load, a hash present triggers an automatic resurrection.
 
 ## Data Models
